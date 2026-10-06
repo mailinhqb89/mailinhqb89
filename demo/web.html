@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NovaX Exchange — Web</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="web">
+<header class="topbar">
+  <div class="brand"><span class="logo">N</span>NovaX<span class="brand-sub">Exchange</span></div>
+  <nav>
+    <a class="active">Giao dịch</a><a>Thị trường</a><a>Futures</a><a>Earn</a><a>Ví</a>
+  </nav>
+  <div class="top-right">
+    <div class="search">⌕ Tìm cặp giao dịch</div>
+    <button class="btn ghost">Nạp tiền</button>
+    <div class="avatar">ML</div>
+  </div>
+</header>
+
+<section class="tickerbar">
+  <div class="pair"><b>BTC/USDT</b><span class="tag">Spot</span></div>
+  <div class="price up big">67,482.15</div>
+  <div class="stat"><span>Thay đổi 24h</span><b class="up">+1,284.40 +1.94%</b></div>
+  <div class="stat"><span>Cao 24h</span><b>68,120.00</b></div>
+  <div class="stat"><span>Thấp 24h</span><b>65,902.33</b></div>
+  <div class="stat"><span>KL 24h (BTC)</span><b>28,416.92</b></div>
+  <div class="stat"><span>KL 24h (USDT)</span><b>1.91B</b></div>
+</section>
+
+<main class="grid">
+  <aside class="panel markets">
+    <div class="tabs"><span class="active">USDT</span><span>BTC</span><span>ETH</span><span>★</span></div>
+    <div class="row head"><span>Cặp</span><span>Giá</span><span>24h</span></div>
+    <div id="marketList"></div>
+  </aside>
+
+  <section class="panel chart">
+    <div class="chart-tools">
+      <span>1m</span><span>15m</span><span class="active">1H</span><span>4H</span><span>1D</span><span>1W</span>
+      <span class="sep"></span><span>Chỉ báo</span><span>MA(7) <i class="c1">●</i></span><span>MA(25) <i class="c2">●</i></span>
+      <span class="right">TradingView · Độ sâu</span>
+    </div>
+    <svg id="chart" viewBox="0 0 900 470" preserveAspectRatio="none"></svg>
+  </section>
+
+  <aside class="panel book">
+    <div class="panel-title">Sổ lệnh <small>0.01 ▾</small></div>
+    <div class="row head"><span>Giá (USDT)</span><span>Số lượng</span><span>Tổng</span></div>
+    <div id="asks"></div>
+    <div class="mid"><span class="up">67,482.15 ↑</span><small>≈ $67,482.15</small></div>
+    <div id="bids"></div>
+  </aside>
+
+  <section class="panel orderform">
+    <div class="tabs"><span class="active">Giới hạn</span><span>Thị trường</span><span>Stop-Limit</span><span>OCO</span></div>
+    <div class="forms">
+      <div class="form">
+        <div class="avail">Khả dụng <b>12,540.88 USDT</b></div>
+        <label>Giá<input value="67,480.00"><em>USDT</em></label>
+        <label>Số lượng<input value="0.1500"><em>BTC</em></label>
+        <div class="slider"><i style="width:40%"></i><b style="left:40%"></b></div>
+        <label>Tổng<input value="10,122.00"><em>USDT</em></label>
+        <button class="btn buy">Mua BTC</button>
+      </div>
+      <div class="form">
+        <div class="avail">Khả dụng <b>0.8421 BTC</b></div>
+        <label>Giá<input value="67,500.00"><em>USDT</em></label>
+        <label>Số lượng<input value="0.2000"><em>BTC</em></label>
+        <div class="slider"><i style="width:24%"></i><b style="left:24%"></b></div>
+        <label>Tổng<input value="13,500.00"><em>USDT</em></label>
+        <button class="btn sell">Bán BTC</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel orders">
+    <div class="tabs"><span class="active">Lệnh đang mở (3)</span><span>Lịch sử lệnh</span><span>Lịch sử giao dịch</span><span>Tài sản</span></div>
+    <div class="row head o"><span>Thời gian</span><span>Cặp</span><span>Loại</span><span>Chiều</span><span>Giá</span><span>Số lượng</span><span>Đã khớp</span><span></span></div>
+    <div class="row o"><span>10-06 14:21:08</span><span>BTC/USDT</span><span>Giới hạn</span><span class="up">Mua</span><span>66,900.00</span><span>0.2500</span><span>0.00%</span><span class="link">Huỷ</span></div>
+    <div class="row o"><span>10-06 13:02:44</span><span>ETH/USDT</span><span>Giới hạn</span><span class="down">Bán</span><span>2,650.00</span><span>3.0000</span><span>42.10%</span><span class="link">Huỷ</span></div>
+    <div class="row o"><span>10-05 22:17:31</span><span>SOL/USDT</span><span>Stop-Limit</span><span class="up">Mua</span><span>148.20</span><span>40.000</span><span>0.00%</span><span class="link">Huỷ</span></div>
+  </section>
+
+  <aside class="panel trades">
+    <div class="panel-title">Giao dịch gần đây</div>
+    <div class="row head"><span>Giá</span><span>Số lượng</span><span>Thời gian</span></div>
+    <div id="tradeList"></div>
+  </aside>
+</main>
+
+<script src="data.js"></script>
+<script>
+const m = document.getElementById('marketList');
+MARKETS.forEach((x, i) => {
+  m.insertAdjacentHTML('beforeend',
+    `<div class="row${i === 0 ? ' sel' : ''}"><span><b>${x[0]}</b><small>/USDT</small></span><span>${x[1]}</span><span class="${x[2] >= 0 ? 'up' : 'down'}">${x[2] >= 0 ? '+' : ''}${x[2].toFixed(2)}%</span></div>`);
+});
+
+function bookRows(el, side, n) {
+  const base = 67482.15, rnd = rng(side === 'ask' ? 7 : 11);
+  let rows = [], total = 0;
+  for (let i = 0; i < n; i++) {
+    const p = side === 'ask' ? base + (n - i) * 0.85 + rnd() * 0.4 : base - (i + 1) * 0.85 - rnd() * 0.4;
+    const q = 0.02 + rnd() ** 2 * 2.4;
+    rows.push([p, q]);
+  }
+  const ordered = side === 'ask' ? [...rows].reverse() : rows;
+  const tot = []; ordered.forEach(r => { total += r[1]; tot.push(total); });
+  if (side === 'ask') tot.reverse();
+  const max = Math.max(...tot);
+  rows.forEach((r, i) => {
+    el.insertAdjacentHTML('beforeend',
+      `<div class="row depth ${side}" style="--d:${(tot[i] / max * 100).toFixed(1)}%"><span class="${side === 'ask' ? 'down' : 'up'}">${fmt(r[0], 2)}</span><span>${r[1].toFixed(4)}</span><span>${tot[i].toFixed(4)}</span></div>`);
+  });
+}
+bookRows(document.getElementById('asks'), 'ask', 12);
+bookRows(document.getElementById('bids'), 'bid', 10);
+
+const t = document.getElementById('tradeList'), tr = rng(5);
+for (let i = 0; i < 16; i++) {
+  const up = tr() > 0.45, p = 67482.15 + (tr() - 0.5) * 6;
+  t.insertAdjacentHTML('beforeend',
+    `<div class="row"><span class="${up ? 'up' : 'down'}">${fmt(p, 2)}</span><span>${(tr() ** 2 * 1.2 + 0.001).toFixed(4)}</span><span class="muted">14:${String(32 - Math.floor(i / 3)).padStart(2, '0')}:${String(59 - i * 3 % 60).padStart(2, '0')}</span></div>`);
+}
+
+drawCandles(document.getElementById('chart'), 900, 470, 84, 67482, { grid: '#1f2633', text: '#6b7486' });
+</script>
+</body>
+</html>

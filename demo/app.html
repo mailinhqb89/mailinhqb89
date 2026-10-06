@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NovaX Exchange — App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="apps">
+<h1><span class="logo">N</span>NovaX Exchange · Mobile App</h1>
+<p class="lead">Giao dịch Spot &amp; Futures mọi lúc mọi nơi — iOS &amp; Android</p>
+
+<div class="phones">
+  <!-- Màn hình 1: Trang chủ -->
+  <div class="phone"><div class="screen">
+    <div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ⌁ ▮</span></div>
+    <div class="scr">
+      <div class="hello"><div><small>Xin chào 👋</small><div style="font-size:17px;font-weight:700">Mai Linh</div></div><div class="avatar">ML</div></div>
+      <div class="card">
+        <div class="lbl">Tổng tài sản (USDT) 👁</div>
+        <div class="bal">48,215.62</div>
+        <div><span class="up">+1,032.18 (+2.19%)</span> <small>hôm nay</small></div>
+      </div>
+      <div class="quick">
+        <div><i>↓</i>Nạp</div><div><i>↑</i>Rút</div><div><i>⇄</i>Chuyển</div><div><i>%</i>Earn</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><b style="font-size:14px">Thị trường</b><small>Xem tất cả ›</small></div>
+      <div id="homeList"></div>
+    </div>
+    <div class="tabbar"><div class="active"><i>⌂</i>Trang chủ</div><div><i>▤</i>Thị trường</div><div><i>⇅</i>Giao dịch</div><div><i>∿</i>Futures</div><div><i>▣</i>Ví</div></div>
+  </div></div>
+
+  <!-- Màn hình 2: Giao dịch -->
+  <div class="phone"><div class="screen">
+    <div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ⌁ ▮</span></div>
+    <div class="scr">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0 4px">
+        <b style="font-size:17px">BTC/USDT ▾</b><span class="up">+1.94%</span>
+      </div>
+      <div style="font-size:24px;font-weight:800" class="up">67,482.15</div>
+      <small>≈ $67,482.15 · KL 24h 28.4K BTC</small>
+      <div class="seg" style="margin-top:10px"><span>15m</span><span class="on">1H</span><span>4H</span><span>1D</span></div>
+      <svg id="miniChart" viewBox="0 0 324 230" style="width:100%;height:230px"></svg>
+      <div class="seg"><span class="on-buy">Mua</span><span>Bán</span></div>
+      <div class="field"><span>Giới hạn ▾</span><b>67,480.00 USDT</b></div>
+      <div class="field"><span>Số lượng</span><b>0.1500 BTC</b></div>
+      <div class="field"><span>Tổng</span><b>10,122.00 USDT</b></div>
+      <div class="pill up" style="padding:12px;font-size:14px;border-radius:10px">Mua BTC</div>
+    </div>
+    <div class="tabbar"><div><i>⌂</i>Trang chủ</div><div><i>▤</i>Thị trường</div><div class="active"><i>⇅</i>Giao dịch</div><div><i>∿</i>Futures</div><div><i>▣</i>Ví</div></div>
+  </div></div>
+
+  <!-- Màn hình 3: Ví -->
+  <div class="phone"><div class="screen">
+    <div class="notch"></div>
+    <div class="status"><span>9:41</span><span>●●● ⌁ ▮</span></div>
+    <div class="scr">
+      <div class="hello"><b style="font-size:17px">Ví của tôi</b><small>Lịch sử ›</small></div>
+      <div class="seg"><span class="on">Tổng quan</span><span>Spot</span><span>Futures</span><span>Earn</span></div>
+      <div class="donut"><div><small>Tổng</small>$48,215</div></div>
+      <div id="walletList"></div>
+    </div>
+    <div class="tabbar"><div><i>⌂</i>Trang chủ</div><div><i>▤</i>Thị trường</div><div><i>⇅</i>Giao dịch</div><div><i>∿</i>Futures</div><div class="active"><i>▣</i>Ví</div></div>
+  </div></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const COLORS = { BTC: '#f7931a', ETH: '#627eea', BNB: '#f0b90b', SOL: '#9945ff', XRP: '#9aa4b2', DOGE: '#c2a633', USDT: '#26a17b' };
+const coin = s => `<span class="coin" style="background:${COLORS[s] || '#8892a6'}">${s.slice(0, 3)}</span>`;
+
+const h = document.getElementById('homeList');
+MARKETS.slice(0, 6).forEach(([s, p, c]) => {
+  h.insertAdjacentHTML('beforeend',
+    `<div class="mrow">${coin(s)}<div><b>${s}</b><br><small>/USDT</small></div><b>${p}</b><span class="pill ${c >= 0 ? 'up' : 'down'}">${c >= 0 ? '+' : ''}${c.toFixed(2)}%</span></div>`);
+});
+
+const w = document.getElementById('walletList');
+[['BTC', '0.3285', '22,167.89'], ['ETH', '4.4720', '11,709.57'], ['USDT', '7,714.40', '7,714.40'],
+ ['SOL', '28.410', '4,343.04'], ['BNB', '3.8520', '2,250.72']].forEach(([s, q, v]) => {
+  w.insertAdjacentHTML('beforeend',
+    `<div class="mrow" style="grid-template-columns:34px 1fr auto">${coin(s)}<div><b>${s}</b><br><small>${q}</small></div><div style="text-align:right"><b>$${v}</b></div></div>`);
+});
+
+drawCandles(document.getElementById('miniChart'), 324, 230, 40, 67482, { grid: '#161c28', text: '#6b7486' });
+</script>
+</body>
+</html>
